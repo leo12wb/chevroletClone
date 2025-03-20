@@ -2,6 +2,10 @@
 
 A web project to display Chevrolet cars in a column format, with images and detailed information for each vehicle.
 
+
+## 🚀 Home Layout
+![Home Image](wwwroot/img/home.png)
+
 ## 📌 Features
 - Display a list of cars with an image, name, and price.
 - API to manage cars (list, add, update, and delete).
@@ -58,5 +62,3 @@ PUT    /api/car/{id}     # Updates an existing car
 DELETE /api/car/{id}     # Removes a car
 ```
 
-## 🚀 Home Layout
-![Home Image](wwwroot/img/home.png)
