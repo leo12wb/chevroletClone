@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Lista de Carros";
+}
+
+<h2 class="text-center my-4" style="font-size: 20px;line-height: 1.5rem;">Bem-vindo ao site Ofertas Chevrolet! Digite a sua cidade e encontre as melhores ofertas da sua região.</h2>
+
+<div class="container">
+    <div class="row" id="carrosContainer"></div>
+</div>
+
+<script>
+    async function carregarCarros() {
+        const response = await fetch("/api/car");
+        const carros = await response.json();
+        const container = document.getElementById("carrosContainer");
+
+        container.innerHTML = "";
+        carros.forEach(carro => {
+            container.innerHTML += `
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <h3 class="title" style="padding:5px;padding-left: 7px;background-color: #6E6E6E;">
+                          <span style="color: #FFFFFF; font-family: Louis, Tahoma, sans-serif; font-weight: normal">
+                              Taxa Zero
+                          </span>
+                        </h3>
+                        <img src="${carro.img}" class="card-img-top" alt="${carro.name}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${carro.name}</h5>
+                            <hr>
+                            <span style="color: #666;">Parcelas de</span>
+                            <span style="color: #e6ac39;line-height: 50%;font-size: 1.8rem;">R$&nbsp;1.490</span>
+                            <p class="card-text font-weight-bold" style="color: #666;">
+                                Preço a vista a partir de <br>
+                                R$ ${carro.price.toFixed(2)} <br> VÁLIDO NA TROCA DO USADO!
+                            </p>
+                            <br>
+                            <a herf="#" target="_self"
+                             style="background-color: transparent; border: 2px solid #b3842d; color: #262626;
+                             padding: 13px;">
+                                Solicitar contato
+                            </a>
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    carregarCarros();
+</script>
+
+<link href="https://fonts.cdnfonts.com/css/louis" rel="stylesheet">
+                
+<style>
+    body{
+        font-family: Louis, Tahoma, sans-serif;
+    }
+    .title::before {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNTEycHQiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDUxMi4wMDA5OSA1MTIiIHdpZHRoPSI1MTJwdCI+CjxnIGlkPSJzdXJmYWNlMSI+CjxwYXRoIGQ9Ik0gNDk3IDM2Ljk1MzEyNSBMIDQzMS4yOTY4NzUgMzYuOTUzMTI1IEMgNDMxLjUzNTE1NiAyOS42NzU3ODEgNDMxLjY2Nzk2OSAyMi4zNTU0NjkgNDMxLjY2Nzk2OSAxNSBDIDQzMS42Njc5NjkgNi43MTQ4NDQgNDI0Ljk0OTIxOSAwIDQxNi42Njc5NjkgMCBMIDk1LjMzMjAzMSAwIEMgODcuMDUwNzgxIDAgODAuMzMyMDMxIDYuNzE0ODQ0IDgwLjMzMjAzMSAxNSBDIDgwLjMzMjAzMSAyMi4zNTU0NjkgODAuNDY0ODQ0IDI5LjY3NTc4MSA4MC43MDMxMjUgMzYuOTUzMTI1IEwgMTUgMzYuOTUzMTI1IEMgNi43MTQ4NDQgMzYuOTUzMTI1IDAgNDMuNjY3OTY5IDAgNTEuOTUzMTI1IEMgMCAxMTkuMTY0MDYyIDE3LjU2NjQwNiAxODIuNTc0MjE5IDQ5LjQ2MDkzOCAyMzAuNTA3ODEyIEMgODAuOTg4MjgxIDI3Ny44OTQ1MzEgMTIyLjk4NDM3NSAzMDUuMDc0MjE5IDE2OC4zNTE1NjIgMzA3LjcxODc1IEMgMTc4LjYzNjcxOSAzMTguOTEwMTU2IDE4OS41MDc4MTIgMzI4LjAzNTE1NiAyMDAuODMyMDMxIDMzNC45OTYwOTQgTCAyMDAuODMyMDMxIDQwMS42NjQwNjIgTCAxNzUuNjY3OTY5IDQwMS42NjQwNjIgQyAxNDUuMjQ2MDk0IDQwMS42NjQwNjIgMTIwLjUgNDI2LjQxNDA2MiAxMjAuNSA0NTYuODMyMDMxIEwgMTIwLjUgNDgxLjk5NjA5NCBMIDExOS40MzM1OTQgNDgxLjk5NjA5NCBDIDExMS4xNDg0MzggNDgxLjk5NjA5NCAxMDQuNDMzNTk0IDQ4OC43MTQ4NDQgMTA0LjQzMzU5NCA0OTYuOTk2MDk0IEMgMTA0LjQzMzU5NCA1MDUuMjgxMjUgMTExLjE0ODQzOCA1MTEuOTk2MDk0IDExOS40MzM1OTQgNTExLjk5NjA5NCBMIDM5Mi41NjY0MDYgNTExLjk5NjA5NCBDIDQwMC44NTE1NjIgNTExLjk5NjA5NCA0MDcuNTY2NDA2IDUwNS4yODEyNSA0MDcuNTY2NDA2IDQ5Ni45OTYwOTQgQyA0MDcuNTY2NDA2IDQ4OC43MTQ4NDQgNDAwLjg1MTU2MiA0ODEuOTk2MDk0IDM5Mi41NjY0MDYgNDgxLjk5NjA5NCBMIDM5MS41IDQ4MS45OTYwOTQgTCAzOTEuNSA0NTYuODMyMDMxIEMgMzkxLjUgNDI2LjQxNDA2MiAzNjYuNzUzOTA2IDQwMS42NjQwNjIgMzM2LjMzMjAzMSA0MDEuNjY0MDYyIEwgMzExLjE2Nzk2OSA0MDEuNjY0MDYyIEwgMzExLjE2Nzk2OSAzMzQuOTk2MDk0IEMgMzIyLjQ5MjE4OCAzMjguMDM5MDYyIDMzMy4zNjcxODggMzE4LjkxMDE1NiAzNDMuNjUyMzQ0IDMwNy43MTg3NSBDIDM4OS4wMTU2MjUgMzA1LjA3NDIxOSA0MzEuMDExNzE5IDI3Ny44OTQ1MzEgNDYyLjU0Mjk2OSAyMzAuNTA3ODEyIEMgNDk0LjQzNzUgMTgyLjU3NDIxOSA1MTIgMTE5LjE2NDA2MiA1MTIgNTEuOTUzMTI1IEMgNTEyIDQzLjY2Nzk2OSA1MDUuMjg1MTU2IDM2Ljk1MzEyNSA0OTcgMzYuOTUzMTI1IFogTSA3NC40Mzc1IDIxMy44OTA2MjUgQyA0OC4xMjg5MDYgMTc0LjM1NTQ2OSAzMi42NzE4NzUgMTIyLjY0NDUzMSAzMC4zMTY0MDYgNjYuOTUzMTI1IEwgODIuMzc4OTA2IDY2Ljk1MzEyNSBDIDg3Ljc4OTA2MiAxMzUuNDE0MDYyIDEwMy44NTkzNzUgMTk4LjY5NTMxMiAxMjguOTc2NTYyIDI0OC45MjU3ODEgQyAxMzIuOTc2NTYyIDI1Ni45MjU3ODEgMTM3LjE2MDE1NiAyNjQuNDg0Mzc1IDE0MS41IDI3MS42MDE1NjIgQyAxMTYuNTUwNzgxIDI2Mi4xNzk2ODggOTMuNDYwOTM4IDI0Mi40ODQzNzUgNzQuNDM3NSAyMTMuODkwNjI1IFogTSAzNjEuNSA0NTYuODMyMDMxIEwgMzYxLjUgNDgyIEwgMTUwLjUgNDgyIEwgMTUwLjUgNDU2LjgzMjAzMSBDIDE1MC41IDQ0Mi45NTcwMzEgMTYxLjc4OTA2MiA0MzEuNjY0MDYyIDE3NS42Njc5NjkgNDMxLjY2NDA2MiBMIDMzNi4zMzIwMzEgNDMxLjY2NDA2MiBDIDM1MC4yMTA5MzggNDMxLjY2NDA2MiAzNjEuNSA0NDIuOTU3MDMxIDM2MS41IDQ1Ni44MzIwMzEgWiBNIDI4MS4xNjc5NjkgNDAxLjY2NDA2MiBMIDIzMC44MzIwMzEgNDAxLjY2NDA2MiBMIDIzMC44MzIwMzEgMzQ4LjAzMTI1IEMgMjM5LjA3ODEyNSAzNTAuMjAzMTI1IDI0Ny40ODA0NjkgMzUxLjMzMjAzMSAyNTYgMzUxLjMzMjAzMSBDIDI2NC41MTk1MzEgMzUxLjMzMjAzMSAyNzIuOTIxODc1IDM1MC4yMDMxMjUgMjgxLjE2Nzk2OSAzNDguMDMxMjUgWiBNIDI5MC40NTcwMzEgMzEyLjM0Mzc1IEMgMjg5Ljc4MTI1IDMxMi42MjEwOTQgMjg5LjEzMjgxMiAzMTIuOTU3MDMxIDI4OC41MTE3MTkgMzEzLjMyODEyNSBDIDI3Ny45MTAxNTYgMzE4LjYwMTU2MiAyNjcuMDE1NjI1IDMyMS4zMzIwMzEgMjU2IDMyMS4zMzIwMzEgQyAyNDQuOTg4MjgxIDMyMS4zMzIwMzEgMjM0LjA5NzY1NiAzMTguNjAxNTYyIDIyMy41IDMxMy4zMzU5MzggQyAyMjIuODcxMDk0IDMxMi45NTcwMzEgMjIyLjIxODc1IDMxMi42MjEwOTQgMjIxLjUzNTE1NiAzMTIuMzM1OTM4IEMgMjA5Ljc3MzQzOCAzMDYuMTE3MTg4IDE5OC4zOTQ1MzEgMjk2LjcyNjU2MiAxODcuNjMyODEyIDI4NC4zODY3MTkgQyAxODcuMDY2NDA2IDI4My41NzgxMjUgMTg2LjQyOTY4OCAyODIuODMyMDMxIDE4NS43MjI2NTYgMjgyLjE1MjM0NCBDIDE3NS4wMzkwNjIgMjY5LjQ2ODc1IDE2NC45ODgyODEgMjUzLjg2NzE4OCAxNTUuODA4NTk0IDIzNS41MDc4MTIgQyAxMjguMjQyMTg4IDE4MC4zNzg5MDYgMTEyLjMyMDMxMiAxMDcuODkwNjI1IDExMC41MDc4MTIgMzAgTCA0MDEuNDkyMTg4IDMwIEMgMzk5LjY3NTc4MSAxMDcuODkwNjI1IDM4My43NTM5MDYgMTgwLjM4MjgxMiAzNTYuMTkxNDA2IDIzNS41MDc4MTIgQyAzNDcuMDExNzE5IDI1My44NjcxODggMzM2Ljk2MDkzOCAyNjkuNDY4NzUgMzI2LjI4MTI1IDI4Mi4xNTIzNDQgQyAzMjUuNTcwMzEyIDI4Mi44MzIwMzEgMzI0LjkyNTc4MSAyODMuNTgyMDMxIDMyNC4zNjMyODEgMjg0LjM5MDYyNSBDIDMxMy42MDE1NjIgMjk2LjczNDM3NSAzMDIuMjE4NzUgMzA2LjEyMTA5NCAyOTAuNDU3MDMxIDMxMi4zNDM3NSBaIE0gNDM3LjU2MjUgMjEzLjg5MDYyNSBDIDQxOC41MzkwNjIgMjQyLjQ4NDM3NSAzOTUuNDQ5MjE5IDI2Mi4xNzk2ODggMzcwLjUgMjcxLjYwMTU2MiBDIDM3NC44Mzk4NDQgMjY0LjQ4NDM3NSAzNzkuMDIzNDM4IDI1Ni45MjU3ODEgMzgzLjAyMzQzOCAyNDguOTI1NzgxIEMgNDA4LjE0MDYyNSAxOTguNjk1MzEyIDQyNC4yMDcwMzEgMTM1LjQxNDA2MiA0MjkuNjIxMDk0IDY2Ljk1MzEyNSBMIDQ4MS42ODM1OTQgNjYuOTUzMTI1IEMgNDc5LjMyODEyNSAxMjIuNjQ0NTMxIDQ2My44NzEwOTQgMTc0LjM1NTQ2OSA0MzcuNTYyNSAyMTMuODkwNjI1IFogTSA0MzcuNTYyNSAyMTMuODkwNjI1ICIgc3R5bGU9IiBzdHJva2U6bm9uZTtmaWxsLXJ1bGU6bm9uemVybztmaWxsOnJnYigwJSwwJSwwJSk7ZmlsbC1vcGFjaXR5OjE7IiAvPgo8L2c+Cjwvc3ZnPg==);
+    background-size: 20px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    align-self: center;
+    content: "";
+    position: relative;
+    right: 1px;
+    top: 7px;
+    display: inline-block;
+    width: 26px;
+    height: 30px;
+    filter: invert(1);
+ }
+</style>
